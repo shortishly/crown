@@ -1,4 +1,4 @@
-# Haystack
+# Crown
 
 Crown is a [heir](http://erlang.org/doc/man/ets.html#heir) for your
 ETS tables. Nothing more, nothing less. It provides a simple
