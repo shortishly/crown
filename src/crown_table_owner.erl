@@ -28,6 +28,8 @@
 -export([terminate/2]).
 
 
+
+-ifdef(NOTEST).
 heir() ->
     case whereis(?MODULE) of
         Pid when is_pid(Pid) ->
@@ -36,6 +38,17 @@ heir() ->
         undefined ->
             error(badarg)
     end.
+-else.
+heir() ->
+    case whereis(?MODULE) of
+        Pid when is_pid(Pid) ->
+            {heir, Pid, []};
+
+        undefined ->
+            {ok, Pid} = gen_server:start({local, ?MODULE}, ?MODULE, [], []),
+            {heir, Pid, []}
+    end.
+-endif.
 
 
 -spec start_link() -> {ok, pid()}.
