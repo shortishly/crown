@@ -50,4 +50,9 @@ new(Name, Type, Options) ->
 
 
 options() ->
-    [named_table, public, {keypos, 2}, crown_table_owner:heir()].
+    try
+        [named_table, public, {keypos, 2}, crown_table_owner:heir()]
+    catch
+        error:badarg ->
+            [named_table, public, {keypos, 2}]
+    end.
